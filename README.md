@@ -1,5 +1,6 @@
 # MD-INPUT
 
+"Form-friendly" material design input elements.
 
 
 ## Installation
