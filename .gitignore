@@ -37,6 +37,7 @@ node_modules/
 
 #bower
 bower_components/
+demo_components/
 
 #Visual Studio
 obj/

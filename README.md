@@ -58,5 +58,5 @@ bower install md-input --save
 
 ## Demo
 
-
+http://EllipticalElements.github.io/md-input
 
