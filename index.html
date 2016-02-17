@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Demo</title>
+    <script src="demo_components/elliptical-component/dist/webcomponents.js"></script>
+    <link rel="stylesheet" href="demo_components/elliptical-sass/dist/elliptical.css">
+    <link rel="stylesheet" href="css/md.components.css">
+     <link rel="stylesheet" href="demo_components/css-docs/docs.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic" rel="stylesheet">
+    
+    <link rel="import" href="demo_components/sass-core-icons/sass-core-icons.html">
+    <link rel="import" href="demo_components/md-icons/md-icons.html">
+    <link rel="import" href="demo_components/md-input/md-input.html">
+    <link rel="import" href="demo_components/md-input/md-radio.html">
+    <link rel="import" href="demo_components/md-input/md-checkbox.html">
+    <link rel="import" href="demo_components/md-input/md-switch.html">
+    <link rel="import" href="demo_components/md-input/md-range.html">
+    <link rel="import" href="demo_components/md-input/md-select.html">
+    <link rel="import" href="demo_components/md-input/md-textarea.html">
+    <link rel="import" href="demo_components/md-input/md-input-icon-button.html">
+    <link rel="import" href="demo_components/mark-down/mark-down.html">
+    
+</head>
+<body>
+<header>
+    <h4>MD-INPUT</h4>
+    <h5 class="padding-right hide-for-small">MATERIAL DESIGN</h5>
+</header>
+<section class="doc-height">
+    <grid-row>
+        <grid-columns class="default-12">
+           <flex-box class="column">
+               <h3>MD-INPUT Elements</h3>
+               <p>Material design form elements.</p>
+               <form class="form-width">
+                <h5>MD-INPUT</h5>   
+                <md-input label="First Name" type="text" data-id="input1"></md-input>
+                <h5>MD-TEXTAREA</h5>
+                <md-textarea label="Message" disable-resize="true" data-id="text1"></md-textarea>
+                <h5>MD-RADIO</h5>
+                <md-radio-list>
+                    <md-radio label="Orange" css-class="concentric" data-name="fruits" data-value="Orange" data-id="Orange" data-checked="true"></md-radio>
+                    <md-radio label="Apple" data-name="fruits" data-value="Apple" data-id="Apple"></md-radio>
+                    <md-radio label="Banana" data-name="fruits" data-value="Banana" data-id="Banana"></md-radio>
+                </md-radio-list>
+                <h5>MD-CHECKBOX</h5>
+                <md-checkbox data-id="check1" data-name="chkName" label="Save Entry" data-checked=true readonly="true"></md-checkbox>
+                <h5>MD-SWITCH</h5>
+                <md-switch data-id="switch1" data-name="switch" data-checked="true"></md-switch>
+                <h5>MD-RANGE</h5>
+                <md-range data-id="range1" data-name="range" data-value="20"></md-range>
+                <h5>MD-SELECT</h5> 
+                <md-select data-id="select1" data-name="select1">
+                    <select>
+                        <option>Select Name</option>
+                        <option>Bob</option>
+                        <option>Steve</option>
+                        <option>Lisa</option> 
+                    </select>     
+                </md-select>  
+                <h5>MD-INPUT-ICON-BUTTON</h5> 
+                <md-input-icon-button icon="schedule" data-id="iconbutton1" label="Set Schedule"></md-input-icon-button>  
+               </form>
+               
+                <h3 class="margin-top two">Markup</h3>
+                <hr>
+                <mark-down class="margin-top two">
+                   ```html
+                    <xmp>
+                    <form class="form-width">
+                      <md-input label="First Name" type="text" data-id="input1"></md-input>
+                      <md-textarea label="Message" disable-resize="true" data-id="text1"></md-textarea>
+                      <md-radio-list>
+                        <md-radio label="Orange" css-class="concentric" data-name="fruits" data-value="Orange" data-id="Orange" data-checked="true"></md-radio>
+                        <md-radio label="Apple" data-name="fruits" data-value="Apple" data-id="Apple"></md-radio>
+                        <md-radio label="Banana" data-name="fruits" data-value="Banana" data-id="Banana"></md-radio>
+                      </md-radio-list>
+                      <md-checkbox data-id="check1" data-name="chkName" label="Save Entry" data-checked=true readonly="true"></md-checkbox>
+                      <md-switch data-id="switch1" data-name="switch" data-checked="true"></md-switch>
+                      <md-range data-id="range1" data-name="range" data-value="20"></md-range>
+                      <md-select data-id="select1" data-name="select1">
+                         <select>
+                           <option>Select Name</option>
+                           <option>Bob</option>
+                           <option>Steve</option>
+                           <option>Lisa</option> 
+                         </select>     
+                      </md-select>  
+                      <md-input-icon-button icon="schedule" data-id="iconbutton1" label="Set Schedule"></md-input-icon-button>  
+                    </form>
+                    </xmp>
+                    ```
+                </mark-down>    
+               
+                <h3 class="margin-top two">Documentation</h3>
+                <hr>
+                <h4 class="margin-top two">MD-INPUT</h4>
+                <section class="docs margin-top">
+                  <h4>Public Properties</h4>
+                  <hr> 
+                  <flex-box class="space-between full-width row">
+                    <span>label</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input label</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>placeholder</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input placeholder</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>type</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input type</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>text</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>required</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>icon</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>the icon prefix</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataId</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM id</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataName</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM name</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataValue</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>declarative set input value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>value</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>gets/sets input value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>disabled</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>readonly</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                </section> 
+                
+                <h4 class="margin-top two">MD-TEXTAREA</h4>
+                <section class="docs margin-top">
+                  <h4>Public Properties</h4>
+                  <hr> 
+                  <flex-box class="space-between full-width row">
+                    <span>label</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input label</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>placeholder</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input placeholder</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>required</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataId</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM id</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataName</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM name</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataValue</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>declarative set input value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>value</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>gets/sets input value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>disabled</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>readonly</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>disableResize</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                </section> 
+                
+                
+                <h4 class="margin-top two">MD-CHECKBOX</h4>
+                <section class="docs margin-top">
+                  <h4>Public Properties</h4>
+                  <hr> 
+                  <flex-box class="space-between full-width row">
+                    <span>label</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input label</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>cssClass</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>css fill class</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>none</span>
+                        <span>alt:'filled'</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>required</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataId</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM id</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataName</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM name</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataChecked</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                        <span>declarative set input checked</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>checked</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                        <span>gets/sets input checked</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>disabled</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                </section> 
+                
+                <h4 class="margin-top two">MD-RADIO</h4>
+                <section class="docs margin-top">
+                  <h4>Public Properties</h4>
+                  <hr> 
+                  <flex-box class="space-between full-width row">
+                    <span>label</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input label</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>cssClass</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>css fill class</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>none</span>
+                        <span>alt:'concentric'</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>required</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataId</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM id</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataName</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM name</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataChecked</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                        <span>declarative set input checked</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>checked</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                        <span>gets/sets input checked</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>disabled</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                </section> 
+                
+                <h4 class="margin-top two">MD-SWITCH</h4>
+                <section class="docs margin-top">
+                  <h4>Public Properties</h4>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>required</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataId</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM id</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataName</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM name</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataChecked</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                        <span>declarative set input checked</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>checked</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                        <span>gets/sets input checked</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>disabled</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                </section> 
+                
+                
+                <h4 class="margin-top two">MD-RANGE</h4>
+                <section class="docs margin-top">
+                  <h4>Public Properties</h4>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>min</span>
+                    <flex-box class="column">
+                        <span>{Number}</span>
+                        <span>min value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>0</span>
+                    </flex-box>
+                  </flex-box>
+                   <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>max</span>
+                    <flex-box class="column">
+                        <span>{Number}</span>
+                        <span>man value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>100</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>required</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataId</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM id</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  
+                  <flex-box class="space-between full-width row">
+                    <span>dataName</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input DOM name</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataValue</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>declarative set input value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>value</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>gets/sets input value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>disabled</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                </section> 
+                
+                <h4 class="margin-top two">MD-SELECT</h4>
+                <section class="docs margin-top">
+                  <h4>Public Properties</h4>
+                  <hr> 
+                  <flex-box class="space-between full-width row">
+                    <span>label</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input label</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>icon</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>dropdown arrow icon</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>arrow-drop-down</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>required</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataId</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>select DOM id</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  
+                  <flex-box class="space-between full-width row">
+                    <span>dataName</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>select DOM name</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataValue</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>declarative set select value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>value</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>gets/sets select value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>disabled</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                </section> 
+                
+                
+                <h4 class="margin-top two">MD-INPUT-ICON-BUTTON</h4>
+                <section class="docs margin-top">
+                  <h4>Public Properties</h4>
+                  <hr> 
+                  <flex-box class="space-between full-width row">
+                    <span>label</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input label</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>placeholder</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>input placeholder</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>icon</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>button icon</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>arrow-drop-down</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>required</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataId</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>select DOM id</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataName</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>select DOM name</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>dataValue</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>declarative set select value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                  <flex-box class="space-between full-width row">
+                    <span>value</span>
+                    <flex-box class="column">
+                        <span>{String}</span>
+                        <span>gets/sets select value</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>null</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>disabled</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                  <hr>
+                   <flex-box class="space-between full-width row">
+                    <span>readonly</span>
+                    <flex-box class="column">
+                        <span>{Boolean}</span>
+                    </flex-box>
+                    <flex-box class="column last">
+                        <span>default:</span>
+                        <span>false</span>
+                    </flex-box>
+                  </flex-box>
+                </section> 
+                
+                   
+           </flex-box>
+        </grid-columns>
+    </grid-row>
+</section>
+<footer>
+    <h5>Demo</h5>
+    <flex-box class="links">
+        <a href="https://github.com/EllipticalElements/md-input/tree/gh-pages">Demo Source</a>
+        <a href="https://github.com/EllipticalElements/md-input">Project Home</a>
+    </flex-box>
+</footer>
+</script>    
+</body>
+</html>
