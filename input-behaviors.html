@@ -18,6 +18,19 @@
         });
     };
 
+    Elliptical.MDInputBehavior._setCheckedProp=function(){
+        var element=this.element;
+        var node=this;
+        Object.defineProperty(node, 'checked', {
+            get: function() { return element.find('input').is(':checked'); },
+            set: function(newValue) {
+                element.find('input').attr('checked',newValue);
+            },
+            enumerable: true,
+            configurable: true
+        });
+    };
+
 
     Elliptical.MDInputBehavior._inputEvents = function () {
         var self = this;
