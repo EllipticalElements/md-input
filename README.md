@@ -12,7 +12,7 @@ bower install md-input --save
 
 ## Usage
 
-```html
+``` html
 <link rel="import" href="bower_components/sass-md-components/sass-md-components.html">
 <link rel="import" href="bower_components/md-icons/md-icons.html">
 <link rel="import" href="bower_components/md-input/md-input-all.html">
@@ -37,11 +37,12 @@ bower install md-input --save
          </select>
    </md-select>
 </form>
+
 ```
 
 ## Individual Component References
 
-```html
+``` html
 <link rel="import" href="bower_components/md-input/md-input.html">
 <link rel="import" href="bower_components/md-input/md-radio.html">
 <link rel="import" href="bower_components/md-input/md-checkbox.html">
