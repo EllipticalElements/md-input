@@ -1,12 +1,12 @@
 {
-  "name": "md-dialog",
-  "description": "md dialog web component",
-  "version": "1.0.3",
+  "name": "md-input",
+  "description": "material design input elements",
+  "version": "1.0.4",
   "author": "S. Francis",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/EllipticalElements/md-dialog.git"
+    "url": "https://github.com/EllipticalElements/md-input.git"
   },
   "devDependencies": {
     "gulp": "^3.8.7",
