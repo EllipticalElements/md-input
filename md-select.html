@@ -17,44 +17,42 @@
 
         is: 'md-select',
 
-        behaviors:[Elliptical.ComponentBehavior,Elliptical.MDInputBehavior],
+        behaviors: [Elliptical.ComponentBehavior, Elliptical.MDInputBehavior],
 
         properties: {
-           label:{
-               type:String,
-               value:''
-           },
-           icon:{
-               type:String,
-               value:'arrow-drop-down'
-           },
-           required:{
-               type:Boolean,
-               value:false
-           },
-           dataId:{
-               type:String,
-               value:null
-           },
-           dataName:{
-               type:String,
-               value:null
-           },
-           dataValue:{
-               type:String,
-               value:null
-           },
-           disabled:{
-               type:Boolean,
-               value:false
-           }
-        },
-        
-        listeners:{
-            
+            label: {
+                type: String,
+                value: ''
+            },
+            icon: {
+                type: String,
+                value: 'arrow-drop-down'
+            },
+            required: {
+                type: Boolean,
+                value: false
+            },
+            dataId: {
+                type: String,
+                value: null
+            },
+            dataName: {
+                type: String,
+                value: null
+            },
+            dataValue: {
+                type: String,
+                value: null
+            },
+            disabled: {
+                type: Boolean,
+                value: false
+            }
         },
 
-        ready:function(){
+        listeners: {},
+
+        ready: function () {
             this._inputEvents();
             this._setRequired();
             this._setValueProp();
@@ -65,42 +63,42 @@
             this._setReadOnly();
             this._setDisabled();
         },
-        
-        _inputEvents:function(){
-                var self=this;
-                this._event(this.element,'change','select',function(event){
-                    var target=$(event.currentTarget);
-                    var val=target.val();
-                    self.value=val;
-                    self._resetSemanticState();
-                    self._onChange(target,val);
-                });
-            },
 
-            _setValue:function(val){
-                if(this.dataValue && dataValue!==undefined){
-                    var select=this.element.find('select');
-                    select.val(this.dataValue);
-                    this.value=this.dataValue;
-                }
-                
-            },
+        _inputEvents: function () {
+            var self = this;
+            this._event(this.element, 'change', 'select', function (event) {
+                var target = $(event.currentTarget);
+                var val = target.val();
+                self.value = val;
+                self._resetSemanticState();
+                self._onChange(target, val);
+            });
+        },
 
-            _onChange:function(target,val){
-                var id=this.dataId;
-                var name=this.dataName;
-                var data={
-                    value:val,
-                    id:id,
-                    name:name
-                };
-                this.element.trigger('md.select.change',data);
-            },
-
-            _setDisabled:function(){
-                if(this.disabled) this.element.find('select').attr('disabled',true);
+        _setValue: function (val) {
+            if (this.dataValue && dataValue !== undefined) {
+                var select = this.element.find('select');
+                select.val(this.dataValue);
+                this.value = this.dataValue;
             }
-            
+
+        },
+
+        _onChange: function (target, val) {
+            var id = this.dataId;
+            var name = this.dataName;
+            var data = {
+                value: val,
+                id: id,
+                name: name
+            };
+            this.element.trigger('md.select.change', data);
+        },
+
+        _setDisabled: function () {
+            if (this.disabled) this.element.find('select').attr('disabled', true);
+        }
+
     });
 
 </script>
