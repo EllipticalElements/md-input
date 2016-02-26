@@ -46,7 +46,7 @@
             value: element.val(),
             id: element.attr('id'),
             name: element.attr('name'),
-            checked: element.is(':checked'),
+            checked: element.is(':checked')
         };
 
         this.element.trigger(this.event, data);
