@@ -5,7 +5,8 @@
 <dom-module id="md-select">
     <style></style>
     <template>
-        <span class="icon-[[icon]]"></span>
+        <span id="span-icon"></span>
+        <span id="prefix-icon" style="display:none"></span>
         <content></content>
         <label>[[label]]</label>
         <input type="hidden">
@@ -27,6 +28,10 @@
             icon: {
                 type: String,
                 value: 'arrow-drop-down'
+            },
+            prefixIcon:{
+                type:String,
+                value:null
             },
             required: {
                 type: Boolean,
@@ -60,6 +65,7 @@
             this._setName();
             this._setValue();
             this._setIcon();
+            this._setPrefixIcon();
             this._setReadOnly();
             this._setDisabled();
         },
@@ -76,13 +82,28 @@
         },
 
         _setValue: function (val) {
-            if (this.dataValue && dataValue !== undefined) {
+            if (this.dataValue && this.dataValue !== undefined) {
                 var select = this.element.find('select');
                 select.val(this.dataValue);
                 this.value = this.dataValue;
             }
-
         },
+
+        _setIcon:function(){
+            var span=this.$['span-icon'];
+            var icon = 'icon-' + this.icon;
+            span.classList.add(icon);
+        },
+
+        _setPrefixIcon:function(){
+            if (!this.prefixIcon) return;
+            var span=this.$['prefix-icon'];
+            var icon = 'icon-' + this.prefixIcon;
+            span.classList.add(icon);
+            span.classList.add('prefix');
+            span.setAttribute('style','');
+        },
+
 
         _onChange: function (target, val) {
             var id = this.dataId;
