@@ -8,10 +8,12 @@
         var node = this;
         Object.defineProperty(node, 'value', {
             get: function () {
-                return element.find('input').val();
+                var input=element.find('input');
+                return input.val();
             },
             set: function (newValue) {
-                element.find('input').val(newValue);
+                var input=element.find('input');
+                input.val(newValue);
             },
             enumerable: true,
             configurable: true
@@ -93,21 +95,21 @@
     Elliptical.MDInputBehavior._setRequired = function () {
         if (this.required) {
             var input = this.element.find('input');
-            input.attr('required', '');
+            input[0].setAttribute('required', 'true');
         }
     };
 
     Elliptical.MDInputBehavior._setReadOnly = function () {
         if (this.readonly) {
             var input = this.element.find('input');
-            input.attr('readonly', '');
+            input[0].setAttribute('readonly', 'true');
         }
     };
 
     Elliptical.MDInputBehavior._setDisabled = function () {
         if (this.disabled) {
             var input = this.element.find('input');
-            input.attr('disabled', '');
+            input[0].setAttribute('disabled', 'true');
         }
     };
 
@@ -121,7 +123,7 @@
     };
 
     Elliptical.MDInputBehavior._onIconSet = function (span) {
-    }
+    };
 
 
 </script>

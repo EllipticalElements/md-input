@@ -3,7 +3,18 @@
 <link rel="import" href="input-behaviors.html">
 
 <dom-module id="md-input">
-    <style></style>
+    <style>
+        :host>input.error{
+            background:none !important;
+            border-color:#bc5251 !important;
+            border-top-width:0 !important;
+            border-left-width:0 !important;
+            border-right-width:0 !important;
+        }
+        :host>input.error+label{
+            color:#bc5251;
+        }
+    </style>
     <template>
         <span class="icon-[[icon]]"></span>
         <input type="[[type]]" placeholder="[[placeholder]]" value="[[value]]">
@@ -83,7 +94,9 @@
         _inputEvents: function () {
             var self = this;
             this._event(this.element, 'focus', 'input', function (event) {
-                if (!self.readonly) {
+                var $input = $(this);
+                var placeholder=$input.attr('placeholder');
+                if (!self.readonly && (!placeholder || placeholder==='')) {
                     $(this).siblings('label, i').addClass('active');
                     self.element.find('span').addClass('active');
                 }
@@ -91,7 +104,8 @@
 
             this._event(this.element, 'blur', 'input', function (event) {
                 var $input = $(this);
-                if ($input.val().length === 0 && $input.attr('placeholder') === '') {
+                var placeholder=$input.attr('placeholder');
+                if ($input.val().length === 0 && (!placeholder || placeholder==='')) {
                     $input.siblings('label, i').removeClass('active');
                 }
                 self.element.find('span').removeClass('active');
@@ -99,7 +113,8 @@
 
             this._event(this.element, 'change', 'input', function (event) {
                 var $input = $(this);
-                if ($input.val().length === 0 && $input.attr('placeholder') !== '') {
+                var placeholder=$input.attr('placeholder');
+                if (!self.readonly && (!placeholder || placeholder==='')) {
                     $input.siblings('label, i').addClass('active');
                     self.element.find('span').addClass('active');
                 }
@@ -116,6 +131,7 @@
             }
         },
 
+
         _onIconSet: function (span) {
             span.addClass('prefix');
         },
@@ -128,6 +144,21 @@
                 name: element.attr('name')
             };
             this.element.trigger('md.input.change', data);
+        },
+
+        setActive:function(){
+            var label = this.element.find('label');
+            label.addClass('active');
+        },
+
+        setName:function(val){
+            this.dataName=val;
+            this._setName();
+        },
+
+        setId:function(val){
+            this.dataId=val;
+            this._setId();
         }
     });
 
