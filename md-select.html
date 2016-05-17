@@ -3,7 +3,11 @@
 <link rel="import" href="input-behaviors.html">
 
 <dom-module id="md-select">
-    <style></style>
+    <style>
+        :host ::content label{
+            color:#b8b8b8;
+        }
+    </style>
     <template>
         <span id="span-icon"></span>
         <span id="prefix-icon" style="display:none"></span>

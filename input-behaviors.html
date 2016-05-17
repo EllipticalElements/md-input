@@ -76,7 +76,8 @@
     };
 
     Elliptical.MDInputBehavior._setChecked = function () {
-        if (this.dataChecked) {
+        var checked=this.getAttribute('data-checked');
+        if (this.dataChecked && checked) {
             var input = this.element.find('input');
             input.prop('checked', true);
         }

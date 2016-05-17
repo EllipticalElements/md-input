@@ -5,6 +5,7 @@
 <dom-module id="md-textarea">
     <style></style>
     <template>
+        <span class="icon-[[icon]]"></span>
         <textarea placeholder="[[placeholder]]"></textarea>
         <label>[[label]]</label>
     </template>
@@ -53,6 +54,10 @@
             disableResize: {
                 type: Boolean,
                 value: false
+            },
+            icon:{
+                type:String,
+                value:null
             }
         },
 
@@ -64,6 +69,7 @@
             this._setValueProp();
             this._setId();
             this._setName();
+            this._setIcon();
             this._setValue();
             this._setResize();
             this._setReadOnly();
@@ -156,6 +162,19 @@
                 var textarea = this.element.find('textarea');
                 textarea.css({resize: 'none'});
             }
+        },
+
+        _onIconSet: function (span) {
+            span.addClass('prefix');
+        },
+
+        _setIcon:function(){
+            if (!this.icon) return;
+            var span = this.element.find('span');
+            var icon = 'icon-' + this.icon;
+            span.attr('class', '');
+            span.addClass(icon);
+            this._onIconSet(span);
         },
 
         _onChange: function (event) {
