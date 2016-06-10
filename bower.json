@@ -1,6 +1,6 @@
 {
   "name": "md-input",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "authors": [
     "S. Francis"
   ],
@@ -46,7 +46,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
-    "elliptical-polymer-behaviors": "~1.1.0",
+    "elliptical-polymer-behaviors": "~1.2.0",
     "sass-md-components":"~1.1.0",
     "md-icons": "~1.0.5"
   },
