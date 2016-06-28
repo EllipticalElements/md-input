@@ -42,7 +42,7 @@
         });
     };
 
-    Elliptical.MDInputBehavior._onChange = function () {
+    Elliptical.MDInputBehavior._onChange = function (event) {
         var element = $(event.currentTarget);
         var data = {
             value: element.val(),
