@@ -151,7 +151,7 @@
             },
             event: {
                 type: String,
-                value: 'md.input.change'
+                value: 'md-input-change'
             },
             disabled: {
                 type: Boolean,
@@ -204,7 +204,7 @@
             this._setValue();
             this._setIcon();
             this._setPrefix();
-            this._setReadOnly();
+            this._setReadonly();
             this._setDisabled();
             this._keyDownEvent();
         },
@@ -342,7 +342,7 @@
                 name: element.attr('name')
             };
 
-            this.element.trigger('md.input.change', data);
+            this.fire(this.event, data);
         },
 
         _onBlur:function(event){

@@ -41,6 +41,10 @@
                 type: Boolean,
                 value: false
             },
+            event:{
+                type:String,
+                value:'md-select-change'
+            },
             dataId: {
                 type: String,
                 value: null
@@ -70,7 +74,7 @@
             this._setValue();
             this._setIcon();
             this._setPrefixIcon();
-            this._setReadOnly();
+            this._setReadonly();
             this._setDisabled();
         },
 
@@ -117,7 +121,7 @@
                 id: id,
                 name: name
             };
-            this.element.trigger('md.select.change', data);
+            this.fire(this.event, data);
         },
 
         _setDisabled: function () {

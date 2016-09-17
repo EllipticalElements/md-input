@@ -49,7 +49,11 @@
             },
             event: {
                 type: String,
-                value: 'md.input-icon-button.change'
+                value: 'md-input-icon-button-change'
+            },
+            submitEvent: {
+                type: String,
+                value: 'md-input-icon-button-submit'
             },
             disabled: {
                 type: Boolean,
@@ -72,7 +76,7 @@
             this._setLabel();
             this._setValue();
             this._setIcon();
-            this._setReadOnly();
+            this._setReadonly();
             this._setDisabled();
         },
 
@@ -120,7 +124,7 @@
                 name: this.dataName
             };
 
-            this.element.trigger('md.input.icon.button.submit', data);
+            this.fire(this.submitEvent, data);
         }
     });
 

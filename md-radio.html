@@ -11,6 +11,9 @@
         :host.error:hover{
             background:none !important;
         }
+        :host.error>input{
+          background:none !important;
+        }
     </style>
     <template>
         <input type="radio" class="[[cssClass]]" value="[[value]]">
@@ -56,7 +59,7 @@
             },
             event: {
                 type: String,
-                value: 'md.radio.change'
+                value: 'md-radio-change'
             },
             disabled: {
                 type: Boolean,
@@ -80,7 +83,7 @@
             this._setInputVisibility();
         },
 
-        _onChange:function(event){
+        __onChange:function(data){
             if(this.required){
                 var radioList=this.element.parents('md-radio-list');
                 if(radioList[0]) radioList[0].resetError();

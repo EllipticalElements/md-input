@@ -1,0 +1,203 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../elliptical-polymer-behaviors/component-behavior.html">
+<link rel="import" href="md-input.html">
+<link rel="import" href="../paper-spinner/paper-spinner-lite.html">
+
+<dom-module id="md-search">
+  <style>
+    :host{
+      position:relative;
+      display:block;
+      --md-search-spinner-color:#ddd;
+    }
+    :host paper-spinner-lite{
+      position: absolute;
+      top: 23px;
+      left: -3px;
+      --paper-spinner-color: var(--md-search-spinner-color);
+    }
+  </style>
+  <template>
+    <md-input icon="search"  type="text" placeholder="[[placeholder]]" data-id="[[dataId]]" enable-changed-event="true"></md-input>
+    <paper-spinner-lite id="searchSpinner"></paper-spinner-lite>
+  </template>
+</dom-module>
+<script>
+
+  Polymer({
+
+    is: 'md-search',
+
+    behaviors: [Elliptical.ComponentBehavior, Elliptical.MDInputBehavior],
+
+    properties: {
+      placeholder: {
+        type: String,
+        value: ''
+      },
+      dataId: {
+        type: String,
+        value: null
+      },
+      dataName: {
+        type: String,
+        value: null
+      },
+      dataValue: {
+        type: String,
+        value: null
+      },
+      event: {
+        type: String,
+        value: 'md-search-change'
+      },
+      eventNamespace:{
+        type: String,
+        value: '-'
+      },
+      disabled: {
+        type: Boolean,
+        value: false
+      },
+      disableChangeEvent: {
+        type: Boolean,
+        value: false
+      },
+
+      queueDelay:{
+        type:Number,
+        value:1000
+      },
+
+      _input:{
+        type:Object,
+        value:null
+      },
+
+      _tmpValue:{
+        type:String,
+        value:null
+      },
+
+      _active:{
+        type:Boolean,
+        value:false
+      }
+
+    },
+
+    listeners: {},
+
+    ready: function () {
+      this._input=this.querySelector('md-input');
+      this._inputEvents();
+      this._setValueProp();
+      this._setId();
+      this._setValue();
+      this._setDisabled();
+    },
+
+    _inputEvents: function () {
+      var self=this;
+      this._event(this.element,this._getComponentEvent('input','changed'),function(event){
+         if(self._validateTriggerElement(event.detail)) self._onKeydown(event);
+      });
+      this._event(this.element,this._getComponentEvent('input','change'),function(event){
+        if(self._validateTriggerElement(event.detail)) self._onChange(event);
+      });
+      this._event(this.element,this._getComponentEvent('input','focus'),function(event){
+        if(self._validateTriggerElement(event.detail)) self._onFocus(event);
+      });
+      this._event(this.element,this._getComponentEvent('input','blur'),function(event){
+        if(self._validateTriggerElement(event.detail)) self._onBlur(event);
+      });
+
+    },
+
+    _validateTriggerElement(detail){
+      return (detail.id===this.dataId);
+    },
+
+    _setId:function(){
+      var input=this._input;
+      input.dataset.id=this.dataId;
+    },
+
+    _onKeydown: function (event) {
+      var self=this;
+      var input=this._input;
+      var evt=this._getComponentEvent('search','changed');
+      var delay=this.queueDelay;
+      if(!this._active ) this._showSpinner();
+      setTimeout(function(){
+        var data=self._getData(event);
+        var val=input.value;
+        if(val !==self._tmpValue){
+          self._tmpValue=val;
+          data.value=val;
+          self.fire(evt, data);
+        }
+      },delay);
+    },
+
+    _setValue: function () {
+      if (this.dataValue && this.dataValue !== undefined) {
+        this.value = this.dataValue;
+      }
+    },
+
+    _onChange: function (event) {
+      this._hideSpinner();
+      var evt=this._getComponentEvent('search','change');
+      var data=this._getData(event);
+      this.fire(evt, data);
+    },
+
+    _onFocus: function (event) {
+      this._hideSpinner();
+      var evt=this._getComponentEvent('search','blur');
+      var data=this._getData(event);
+      this.fire(evt, data);
+    },
+
+    _onBlur: function (event) {
+      this._hideSpinner();
+      var evt=this._getComponentEvent('search','blur');
+      var data=this._getData(event);
+      this.fire(evt, data);
+    },
+
+    setId: function (val) {
+      this.dataId = val;
+      this._setId();
+    },
+
+    setError: function () {
+      this.classList.add('error');
+    },
+
+    _showSpinner:function(){
+      this._input.hidePrefixIcon();
+      this._active=true;
+      this.$.searchSpinner.setAttribute('active',true);
+    },
+
+    _hideSpinner:function(){
+      this._tmpValue=null;
+      this.$.searchSpinner.removeAttribute('active');
+      this._active=false;
+      this._input.showPrefixIcon();
+    },
+
+    showSpinner:function(){
+      this._showSpinner();
+    },
+
+    hideSpinner:function(){
+     this._hideSpinner();
+    }
+
+
+  });
+
+</script>

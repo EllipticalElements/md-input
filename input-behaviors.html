@@ -1,130 +1,184 @@
 <script>
 
-    //Base  Behavior
-    Elliptical.MDInputBehavior = {};
+  //Base  Behavior
+  Elliptical.MDInputBehavior = {};
 
-    Elliptical.MDInputBehavior._setValueProp = function () {
-        var element = this.element;
-        var node = this;
-        Object.defineProperty(node, 'value', {
-            get: function () {
-                var input=element.find('input');
-                return input.val();
-            },
-            set: function (newValue) {
-                var input=element.find('input');
-                input.val(newValue);
-            },
-            enumerable: true,
-            configurable: true
-        });
+  Elliptical.MDInputBehavior._setValueProp = function () {
+    var element = this.element;
+    var node = this;
+    Object.defineProperty(node, 'value', {
+      get: function () {
+        var input = element.find('input');
+        return input.val();
+      },
+      set: function (newValue) {
+        var input = element.find('input');
+        input.val(newValue);
+        if(node.dataset.value!==newValue) node._setDataValue();
+        if(!newValue || newValue==='') node._resetLabel();
+        else node._setActiveLabel();
+      },
+      enumerable: true,
+      configurable: true
+    });
+  };
+
+  Elliptical.MDInputBehavior._setCheckedProp = function () {
+    var element = this.element;
+    var node = this;
+    Object.defineProperty(node, 'checked', {
+      get: function () {
+        return element.find('input').is(':checked');
+      },
+      set: function (newValue) {
+        var input=element.find('input');
+        input.attr('checked', newValue);
+        input[0].checked=newValue;
+      },
+      enumerable: true,
+      configurable: true
+    });
+  };
+
+
+  Elliptical.MDInputBehavior._inputEvents = function () {
+    var self = this;
+    this._event(this.element, 'change', 'input', function (event) {
+      self._resetSemanticState();
+      self._onChange(event);
+    });
+  };
+
+  Elliptical.MDInputBehavior._onChange = function (event) {
+    var element = $(event.currentTarget);
+    var data = {
+      value: element.val(),
+      id: element.attr('id'),
+      name: element.attr('name'),
+      checked: element.is(':checked')
     };
 
-    Elliptical.MDInputBehavior._setCheckedProp=function(){
-        var element=this.element;
-        var node=this;
-        Object.defineProperty(node, 'checked', {
-            get: function() { return element.find('input').is(':checked'); },
-            set: function(newValue) {
-                element.find('input').attr('checked',newValue);
-            },
-            enumerable: true,
-            configurable: true
-        });
+    this.fire(this.event, data);
+    this.__onChange(data);
+  };
+
+  Elliptical.MDInputBehavior.__onChange = function (data) {};
+
+
+  Elliptical.MDInputBehavior._setId = function () {
+    if (this.dataId) {
+      var input = this.element.find('input');
+      input.attr('id', this.dataId);
+    }
+  };
+
+  Elliptical.MDInputBehavior._getComponentEvent = function (type,evt) {
+    return 'md' + this.eventNamespace + type + this.eventNamespace + evt;
+  };
+
+  Elliptical.MDInputBehavior._setLabel = function () {
+    if (this.dataId) {
+      var label = this.element.find('label');
+      label.attr('for', this.dataId);
+    }
+  };
+
+  Elliptical.MDInputBehavior._setName = function () {
+    if (this.dataName) {
+      var input = this.element.find('input');
+      input.attr('name', this.dataName);
+    }
+  };
+
+  Elliptical.MDInputBehavior._setChecked = function () {
+    var checked = this.getAttribute('data-checked');
+    if (this.dataChecked && checked) {
+      var input = this.element.find('input');
+      input.prop('checked', true);
+    }
+  };
+
+  Elliptical.MDInputBehavior._setValue = function () {
+    if (this.dataValue || this.dataValue !== undefined) {
+      this.value = this.dataValue;
+    }
+  };
+
+  Elliptical.MDInputBehavior._setDataValue = function () {
+    this.dataValue=this.value;
+    this.dataset.value=this.value;
+  };
+
+  Elliptical.MDInputBehavior._resetLabel = function () {
+    this.element.find('label').removeClass('active');
+  };
+
+  Elliptical.MDInputBehavior._setActiveLabel = function () {
+    this.element.find('label').addClass('active');
+  };
+
+  Elliptical.MDInputBehavior._setInputVisibility = function () {
+    this.element.css({'visibility': 'visible'});
+  };
+
+  Elliptical.MDInputBehavior._setRequired = function () {
+    if (this.required) {
+      var input = this.element.find('input');
+      input[0].setAttribute('required', 'true');
+    }
+  };
+
+  Elliptical.MDInputBehavior._setReadonly = function () {
+    if (this.readonly) {
+      var input = this.element.find('input');
+      input[0].setAttribute('readonly', 'readonly');
+    }
+  };
+
+  Elliptical.MDInputBehavior._setWritable = function () {
+    if (this.readonly) {
+      var input = this.element.find('input');
+      input[0].removeAttribute('readonly');
+    }
+  };
+
+  Elliptical.MDInputBehavior._getData = function (event) {
+    var element = $(event.currentTarget);
+    var data = {
+      value: element.val(),
+      id: element.attr('id'),
+      name: element.attr('name')
     };
 
+    return data;
+  };
 
-    Elliptical.MDInputBehavior._inputEvents = function () {
-        var self = this;
-        this._event(this.element, 'change', 'input', function (event) {
-            self._resetSemanticState();
-            self._onChange(event);
-        });
-    };
+  Elliptical.MDInputBehavior._setDisabled = function () {
+    if (this.disabled) {
+      var input = this.element.find('input');
+      input[0].setAttribute('disabled', 'true');
+    }
+  };
 
-    Elliptical.MDInputBehavior._onChange = function (event) {
-        var element = $(event.currentTarget);
-        var data = {
-            value: element.val(),
-            id: element.attr('id'),
-            name: element.attr('name'),
-            checked: element.is(':checked')
-        };
+  Elliptical.MDInputBehavior._setEnabled = function () {
+    if (this.disabled) {
+      var input = this.element.find('input');
+      input[0].removeAttribute('disabled');
+    }
+  };
 
-        this.element.trigger(this.event, data);
-    };
+  Elliptical.MDInputBehavior._setIcon = function () {
+    if (!this.icon) return;
+    var span = this.element.find('span');
+    var icon = 'icon-' + this.icon;
+    span.attr('class', '');
+    span.addClass(icon);
+    this._onIconSet(span);
+  };
 
-    Elliptical.MDInputBehavior._setId = function () {
-        if (this.dataId) {
-            var input = this.element.find('input');
-            input.attr('id', this.dataId);
-        }
-    };
+  Elliptical.MDInputBehavior._onIconSet = function (span) {
+  };
 
-    Elliptical.MDInputBehavior._setLabel = function () {
-        if (this.dataId) {
-            var label = this.element.find('label');
-            label.attr('for', this.dataId);
-        }
-    };
-
-    Elliptical.MDInputBehavior._setName = function () {
-        if (this.dataName) {
-            var input = this.element.find('input');
-            input.attr('name', this.dataName);
-        }
-    };
-
-    Elliptical.MDInputBehavior._setChecked = function () {
-        var checked=this.getAttribute('data-checked');
-        if (this.dataChecked && checked) {
-            var input = this.element.find('input');
-            input.prop('checked', true);
-        }
-    };
-
-    Elliptical.MDInputBehavior._setValue = function () {
-        if (this.dataValue || this.dataValue !== undefined) {
-            this.value = this.dataValue;
-        }
-    };
-
-    Elliptical.MDInputBehavior._setInputVisibility = function () {
-        this.element.css({'visibility': 'visible'});
-    };
-
-    Elliptical.MDInputBehavior._setRequired = function () {
-        if (this.required) {
-            var input = this.element.find('input');
-            input[0].setAttribute('required', 'true');
-        }
-    };
-
-    Elliptical.MDInputBehavior._setReadOnly = function () {
-        if (this.readonly) {
-            var input = this.element.find('input');
-            input[0].setAttribute('readonly', 'true');
-        }
-    };
-
-    Elliptical.MDInputBehavior._setDisabled = function () {
-        if (this.disabled) {
-            var input = this.element.find('input');
-            input[0].setAttribute('disabled', 'true');
-        }
-    };
-
-    Elliptical.MDInputBehavior._setIcon = function () {
-        if (!this.icon) return;
-        var span = this.element.find('span');
-        var icon = 'icon-' + this.icon;
-        span.attr('class', '');
-        span.addClass(icon);
-        this._onIconSet(span);
-    };
-
-    Elliptical.MDInputBehavior._onIconSet = function (span) {
-    };
 
 
 </script>

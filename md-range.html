@@ -62,7 +62,7 @@
             },
             event: {
                 type: String,
-                value: 'md.range.change'
+                value: 'md-range-change'
             },
             disabled: {
                 type: Boolean,
@@ -121,7 +121,7 @@
                 id: input.attr('id'),
                 name: input.attr('name')
             };
-            element.trigger('md.range.change', data);
+            this.fire(this.event, data);
         },
 
         _onStart: function (event) {

@@ -3,189 +3,291 @@
 <link rel="import" href="input-behaviors.html">
 
 <dom-module id="md-textarea">
-    <style></style>
-    <template>
-        <span class="icon-[[icon]]"></span>
-        <textarea placeholder="[[placeholder]]"></textarea>
-        <label>[[label]]</label>
-    </template>
+  <style>
+    :host.error {
+      background: none !important;
+    }
+
+    :host.error:hover {
+      background: none !important;
+    }
+
+    :host > textarea.error {
+      background: none !important;
+      border-color: #bc5251 !important;
+      border-top-width: 0 !important;
+      border-left-width: 0 !important;
+      border-right-width: 0 !important;
+    }
+
+    :host > textarea.error + label {
+      color: #bc5251;
+    }
+  </style>
+  <template>
+    <span class="icon-[[icon]]" id="prefixIcon"></span>
+    <textarea placeholder="[[placeholder]]"></textarea>
+    <label>[[label]]</label>
+  </template>
 </dom-module>
 <script>
 
-    Polymer({
+  Polymer({
 
-        is: 'md-textarea',
+    is: 'md-textarea',
 
-        behaviors: [Elliptical.ComponentBehavior],
+    behaviors: [Elliptical.ComponentBehavior],
 
-        properties: {
-            label: {
-                type: String,
-                value: ''
-            },
-            placeholder: {
-                type: String,
-                value: ''
-            },
-            required: {
-                type: Boolean,
-                value: false
-            },
-            dataId: {
-                type: String,
-                value: null
-            },
-            dataName: {
-                type: String,
-                value: null
-            },
-            dataValue: {
-                type: String,
-                value: null
-            },
-            disabled: {
-                type: Boolean,
-                value: false
-            },
-            readonly: {
-                type: Boolean,
-                value: false
-            },
-            disableResize: {
-                type: Boolean,
-                value: false
-            },
-            icon:{
-                type:String,
-                value:null
-            }
+    properties: {
+      label: {
+        type: String,
+        value: ''
+      },
+      placeholder: {
+        type: String,
+        value: ''
+      },
+      required: {
+        type: Boolean,
+        value: false
+      },
+      dataId: {
+        type: String,
+        value: null
+      },
+      dataName: {
+        type: String,
+        value: null
+      },
+      dataValue: {
+        type: String,
+        value: null
+      },
+      eventNamespace:{
+        type: String,
+        value: '-'
+      },
+      disabled: {
+        type: Boolean,
+        value: false
+      },
+      readonly: {
+        type: Boolean,
+        value: false
+      },
+      disableResize: {
+        type: Boolean,
+        value: false
+      },
+      icon: {
+        type: String,
+        value: null,
+        reflectToAttribute:true
+      },
+      enableChangedEvent:{
+        type:Boolean,
+        value:false
+      }
+    },
+
+    listeners: {},
+
+    ready: function () {
+      this._inputEvents();
+      this._setRequired();
+      this._setValueProp();
+      this._setId();
+      this._setName();
+      this._setIcon();
+      this._setValue();
+      this._setResize();
+      this._setReadonly();
+      this._setDisabled();
+    },
+
+    _setValueProp: function () {
+      var element = this.element;
+      var node = this;
+      Object.defineProperty(node, 'value', {
+        get: function () {
+          return element.find('textarea').val();
         },
-
-        listeners: {},
-
-        ready: function () {
-            this._inputEvents();
-            this._setRequired();
-            this._setValueProp();
-            this._setId();
-            this._setName();
-            this._setIcon();
-            this._setValue();
-            this._setResize();
-            this._setReadOnly();
-            this._setDisabled();
+        set: function (newValue) {
+          element.find('textarea').val(newValue);
         },
+        enumerable: true,
+        configurable: true
+      });
+    },
 
-        _setValueProp: function () {
-            var element = this.element;
-            var node = this;
-            Object.defineProperty(node, 'value', {
-                get: function () {
-                    return element.find('textarea').val();
-                },
-                set: function (newValue) {
-                    element.find('textarea').val(newValue);
-                },
-                enumerable: true,
-                configurable: true
-            });
-        },
+    _inputEvents: function () {
+      var self = this;
+      this._event(this.element, 'focus', 'textarea', function (event) {
+        if (!self.readonly) $(this).siblings('label, i').addClass('active');
+        self._onEvent('focus', event);
+      });
 
-        _inputEvents: function () {
-            var self = this;
-            this._event(this.element, 'focus', 'textarea', function (event) {
-                if (!self.readonly) $(this).siblings('label, i').addClass('active');
-            });
-
-            this._event(this.element, 'blur', 'textarea', function (event) {
-                var $input = $(this);
-                if ($input.val().length === 0 && $input.attr('placeholder') === '') {
-                    $input.siblings('label, i').removeClass('active');
-                }
-            });
-
-            this._event(this.element, 'change', 'textarea', function (event) {
-                var $input = $(this);
-                if ($input.val().length === 0 && $input.attr('placeholder') !== '') {
-                    $input.siblings('label, i').addClass('active');
-                }
-                self._resetSemanticState();
-                self._onChange(event);
-            });
-        },
-
-        _setValue: function () {
-            if (this.dataValue && this.dataValue !== undefined) {
-                this.value = this.dataValue;
-                var label = this.element.find('label');
-                label.addClass('active');
-            }
-        },
-
-        _setId: function () {
-            if (this.dataId) {
-                var textarea = this.element.find('textarea');
-                textarea.attr('id', this.dataId);
-            }
-        },
-
-        _setName: function () {
-            if (this.dataName) {
-                var textarea = this.element.find('textarea');
-                textarea.attr('name', this.dataName);
-            }
-        },
-
-        _setRequired: function () {
-            if (this.required) {
-                var textarea = this.element.find('textarea');
-                textarea.attr('required', '');
-            }
-        },
-
-        _setReadOnly: function () {
-            if (this.readonly) {
-                var textarea = this.element.find('textarea');
-                textarea.attr('readonly', '');
-            }
-        },
-
-        _setDisabled: function () {
-            if (this.disabled) {
-                var textarea = this.element.find('textarea');
-                textarea.attr('disabled', '');
-            }
-        },
-
-        _setResize: function () {
-            if (this.disableResize) {
-                var textarea = this.element.find('textarea');
-                textarea.css({resize: 'none'});
-            }
-        },
-
-        _onIconSet: function (span) {
-            span.addClass('prefix');
-        },
-
-        _setIcon:function(){
-            if (!this.icon) return;
-            var span = this.element.find('span');
-            var icon = 'icon-' + this.icon;
-            span.attr('class', '');
-            span.addClass(icon);
-            this._onIconSet(span);
-        },
-
-        _onChange: function (event) {
-            var element = $(event.currentTarget);
-            var data = {
-                value: element.val(),
-                id: element.attr('id'),
-                name: element.attr('name')
-            };
-            this.element.trigger('md.textarea.change', data);
+      this._event(this.element, 'blur', 'textarea', function (event) {
+        var $input = $(this);
+        if ($input.val().length === 0 && $input.attr('placeholder') === '') {
+          $input.siblings('label, i').removeClass('active');
         }
-    });
+        self._onEvent('blur', event);
+      });
+
+      this._event(this.element, 'change', 'textarea', function (event) {
+        var $input = $(this);
+        if ($input.val().length === 0 && $input.attr('placeholder') !== '') {
+          $input.siblings('label, i').addClass('active');
+        }
+        self._resetSemanticState();
+        self._onEvent('change', event);
+      });
+    },
+
+    _onKeydown: function (event) {
+      var self=this;
+      var evt=this._getComponentEvent('changed');
+      setTimeout(function(){
+        var data=self._getData(event);
+        self.fire(evt, data);
+      },250);
+    },
+
+    _keyDownEvent: function () {
+      this._event(this.element, 'keydown', 'input', this._onKeydown.bind(this));
+    },
+
+    _getComponentEvent:function(evt){
+      return 'md' + this.eventNamespace + 'textarea' + this.eventNamespace + evt;
+    },
+
+    _setValue: function () {
+      if (this.dataValue && this.dataValue !== undefined) {
+        this.value = this.dataValue;
+        var label = this.element.find('label');
+        label.addClass('active');
+      }
+    },
+
+    _setId: function () {
+      if (this.dataId) {
+        var textarea = this.element.find('textarea');
+        textarea.attr('id', this.dataId);
+      }
+    },
+
+    _setName: function () {
+      if (this.dataName) {
+        var textarea = this.element.find('textarea');
+        textarea.attr('name', this.dataName);
+      }
+    },
+
+    _setRequired: function () {
+      if (this.required) {
+        var textarea = this.element.find('textarea');
+        textarea.attr('required', '');
+      }
+    },
+
+    _setReadonly: function () {
+      if (this.readonly) {
+        var textarea = this.element.find('textarea');
+        textarea.attr('readonly', '');
+      }
+    },
+
+    _setDisabled: function () {
+      if (this.disabled) {
+        var textarea = this.element.find('textarea');
+        textarea.attr('disabled', '');
+      }
+    },
+
+    _setResize: function () {
+      if (this.disableResize) {
+        var textarea = this.element.find('textarea');
+        textarea.css({resize: 'none'});
+      }
+    },
+
+    _onIconSet: function (span) {
+      span.addClass('prefix');
+    },
+
+    _setIcon: function () {
+      if (!this.icon) return;
+      var span = this.element.find('span');
+      var icon = 'icon-' + this.icon;
+      span.attr('class', '');
+      span.addClass(icon);
+      this._onIconSet(span);
+    },
+
+    _onEvent: function (strEvent, event) {
+      var evt=this._getComponentEvent('textarea',strEvent);
+      var data = this._getData(event);
+      this.fire(evt, data);
+    },
+
+    _getData:function(event){
+      var element = $(event.currentTarget);
+      var data = {
+        value: element.val(),
+        id: element.attr('id'),
+        name: element.attr('name')
+      };
+
+      return data;
+    },
+
+    setName: function (val) {
+      this.dataName = val;
+      this._setName();
+    },
+
+    setId: function (val) {
+      this.dataId = val;
+      this._setId();
+    },
+
+    setError: function () {
+      this.classList.add('error');
+    },
+
+    hidePrefixIcon:function(){
+      this.$.prefixIcon.style.visibility='hidden';
+    },
+
+    showPrefixIcon:function(){
+      this.$.prefixIcon.style.visibility='visible';
+    },
+
+    setReadonly:function(){
+      this.readonly=true;
+      this.setAttribute('readonly',true);
+      this._setReadonly();
+    },
+
+    setWritable:function(){
+      this._setWritable();
+      this.readonly=false;
+      this.removeAttribute('readonly');
+    },
+
+    setDisabled:function(){
+      this.disabled=true;
+      this.setAttribute('disabled',true);
+      this._setDisabled();
+    },
+
+    setEnabled:function(){
+      this.disabled=false;
+      this.removeAttribute('disabled');
+      this._setEnabled();
+    }
+
+  });
 
 </script>

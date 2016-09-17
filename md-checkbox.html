@@ -4,86 +4,120 @@
 <link rel="import" href="md-checkbox-list.html">
 
 <dom-module id="md-checkbox">
-    <style></style>
-    <template>
-        <input type="checkbox" class="[[filled]]">
-        <label>[[label]]</label>
-    </template>
+  <style></style>
+  <template>
+    <input type="checkbox" class="[[filled]]">
+    <label>[[label]]</label>
+  </template>
 </dom-module>
 <script>
 
-    Polymer({
+  Polymer({
 
-        is: 'md-checkbox',
+    is: 'md-checkbox',
 
-        behaviors: [Elliptical.ComponentBehavior, Elliptical.MDInputBehavior],
+    behaviors: [Elliptical.ComponentBehavior, Elliptical.MDInputBehavior],
 
-        properties: {
-            label: {
-                type: String,
-                value: null
-            },
-            required: {
-                type: Boolean,
-                value: false
-            },
-            cssClass: {
-                type: String,
-                value: null
-            },
-            dataId: {
-                type: String,
-                value: null
-            },
-            dataName: {
-                type: String,
-                value: null
-            },
-            dataValue: {
-                type: String,
-                value: null
-            },
-            dataChecked: {
-                type: Boolean,
-                value: false
-            },
-            event: {
-                type: String,
-                value: 'md.checkbox.change'
-            },
-            disabled: {
-                type: Boolean,
-                value: false
-            }
-        },
+    properties: {
+      label: {
+        type: String,
+        value: null
+      },
+      required: {
+        type: Boolean,
+        value: false
+      },
+      cssClass: {
+        type: String,
+        value: null
+      },
+      dataId: {
+        type: String,
+        value: null
+      },
+      dataName: {
+        type: String,
+        value: null
+      },
+      dataValue: {
+        type: String,
+        value: null
+      },
+      dataChecked: {
+        type: Boolean,
+        value: false
+      },
+      event: {
+        type: String,
+        value: 'md-checkbox-change'
+      },
+      disabled: {
+        type: Boolean,
+        value: false
+      },
+      attributeListener:{
+        type:Boolean,
+        value:false
+      },
+      checked:{
+        type:Boolean,
+        value:false
+      }
+    },
 
-        listeners: {},
+    listeners: {},
 
-        ready: function () {
-            this._inputEvents();
-            this._setValueProp();
-            this._setCheckedProp();
-            this._setId();
-            this._setName();
-            this._setLabel();
-            this._setValue();
-            this._setChecked();
-            this._setDisabled();
-            this._setInputVisibility();
-        },
+    ready: function () {
+      this._inputEvents();
+      this._setValueProp();
+      this._setCheckedProp();
+      this._setId();
+      this._setName();
+      this._setLabel();
+      this._setValue();
+      this._setChecked();
+      this._setDisabled();
+      this._setInputVisibility();
+    },
 
-        _onChange: function (event) {
-            var element = $(event.currentTarget);
-            var checked = element.is(':checked');
-            var data = {
-                value: element.val(),
-                checked: checked,
-                id: element.attr('id'),
-                name: element.attr('name')
-            };
-            this.element.trigger('md.checkbox.change', data);
-            (checked) ? this.element.attr('checked', '') : this.element.removeAttr('checked');
+    _onChange: function (event) {
+      var element = $(event.currentTarget);
+      var checked = element.is(':checked');
+      var data = {
+        value: element.val(),
+        checked: checked,
+        id: element.attr('id'),
+        name: element.attr('name')
+      };
+      this.fire(this.event, data);
+      (checked) ? this.element.attr('checked', '') : this.element.removeAttr('checked');
+    },
+
+    setDisabled: function () {
+      this.disabled = true;
+      this.setAttribute('disabled', true);
+      this._setDisabled();
+    },
+
+    setEnabled: function () {
+      this._setEnabled();
+      this.disabled = false;
+      this.removeAttribute('disabled');
+
+    },
+
+    attributeChanged:function(name,type){
+      if(this.attributeListener){
+        if(name==='checked'){
+          this.checked=this.hasAttribute('checked');
         }
-    });
+      }
+    },
+
+    isChecked:function(){
+      return this.element.find('input').is(':checked');
+    }
+
+  });
 
 </script>
